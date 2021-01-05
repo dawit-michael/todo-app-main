@@ -1,36 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+  <link rel="stylesheet" href="public/main.css">
+  <link rel="stylesheet" href="src/styles/style.css">
   <title>Frontend Mentor | Todo app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
   </style>
 </head>
+
 <body>
+  <div class="w-screen h-screen bg-DarkGrayishBlue relative">
+    <!-- background image -->
+    <div class="bg-cover w-full h-1/3  bg-image "></div>
+    <!-- body -->
+    <div class="w-full h-2/3 bg-VeryDarkBlue"></div>
 
-  Todo
+    <!-- wrapper / content-->
+    <div
+      class=" lg:w-1/3 w-full h-5/6  mx-auto lg:px-0 px-8 absolute top-14 lg:left-1/3 left-0 flex flex-col space-y-5 ">
 
-  <!-- Add dynamic number --> items left
+      <!-- Heading -->
+      <div class="py-6 rounded w-full">
+        <div class="flex justify-between items-center">
+          <h1 class="text-white text-3xl font-semibold tracking-widest">TODO</h1>
+          <!-- theme manager-->
+          <div><img src="images/icon-sun.svg" alt=""> </div>
+        </div>
+      </div>
+      <!-- create new todo -->
+      <div class="bg-VeryDarkDesaturatedBlue h-16 rounded w-full px-6 py-3">
+        <div class="w-full h-full flex items-center   ">
+          <div> <button
+              class="rounded-full w-6 h-6 border border-DarkGrayishBlue flex items-center justify-center focus:outline-none">
 
-  All
-  Active 
-  Completed
+            </button></div>
+          <input type="text" name="price" id="price"
+            class="bg-transparent text-white    focus:outline-none  block w-full pl-7 pr-12 sm:text-sm  border-gray-300 "
+            placeholder="Create a new todo...">
+        </div>
+      </div>
+      <!-- List of todos -->
+      <div
+        class="bg-VeryDarkDesaturatedBlue rounded-md h-full relative shadow-xl divide-y divide-gray-600 divide-solid ">
+        <!-- list tile -->
+        <div class="h-16 flex items-center justify-between px-6">
+          <div class="flex items-center  space-x-4">
+            <div> <button
+                class="rounded-full w-6 h-6  border border-DarkGrayishBlue  flex items-center justify-center focus:outline-none">
+                <img src="images/icon-check.svg" alt="">
+              </button></div>
+            <h6 class="line-through text-DarkGrayishBlue">Complete online JavaScript</h6>
+          </div>
+          <img class="w-4 h-4" src="/images/icon-cross.svg" alt="">
 
-  Clear Completed
+        </div>
+        <!--  -->
+        <div class="h-16 flex items-center justify-between px-6">
+          <div class="flex items-center  space-x-4">
+            <div> <button
+                class="rounded-full w-6 h-6 border border-DarkGrayishBlue flex items-center justify-center focus:outline-none">
+                <!-- <img src="images/icon-check.svg" alt=""> -->
+              </button></div>
+            <h6 class=" text-gray-200 ">Read for 1 hour</h6>
+          </div>
+          <img class="w-4 h-4" src="/images/icon-cross.svg" alt="">
+        </div>
+        <!--  -->
+        <div class="h-16 flex items-center justify-between px-6">
+          <div class="flex items-center  space-x-4">
+            <div> <button
+                class="rounded-full w-6 h-6 border border-DarkGrayishBlue flex items-center justify-center focus:outline-none">
+                <!-- <img src="images/icon-check.svg" alt=""> -->
+              </button></div>
+            <h6 class=" text-gray-200 ">Read for 1 hour</h6>
+          </div>
+          <img class="w-4 h-4" src="/images/icon-cross.svg" alt="">
+        </div>
+        <!--  -->
+        <div class="h-16 flex items-center justify-between px-6">
+          <div class="flex items-center  space-x-4">
+            <div> <button
+                class="rounded-full w-6 h-6 border border-DarkGrayishBlue flex items-center justify-center focus:outline-none">
+                <!-- <img src="images/icon-check.svg" alt=""> -->
+              </button></div>
+            <h6 class=" text-gray-200 ">Read for 1 hour</h6>
+          </div>
+          <img class="w-4 h-4" src="/images/icon-cross.svg" alt="">
+        </div>
+        <!-- bottom bar -->
+        <div class="h-16 w-full absolute bottom-0 flex justify-between items-center px-5">
+          <!-- list items left -->
+          <h4 class="text-sm text-DarkGrayishBlue ">5 items left</h4>
+          <!-- tab -->
+          <div class="flex items-center space-x-3 lg:block hidden">
+            <button class="text-sm text-BrightBlue font-semibold focus:outline-none">All</button>
+            <button class="text-sm text-DarkGrayishBlue font-semibold focus:outline-none">Active</button>
+            <button class="text-sm text-DarkGrayishBlue font-semibold focus:outline-none">Completed</button>
+          </div>
 
-  Drag and drop to reorder list
+          <h4 class="text-sm text-DarkGrayishBlue ">Clear Completed</h4>
+        </div>
+
+      </div>
+      <!-- mobile tab -->
+      <div
+        class="lg:hidden block h-16 w-full flex justify-center  items-center px-5 bg-VeryDarkDesaturatedBlue rounded-md py-4">
+        <!-- tab -->
+        <div class="flex items-center space-x-3">
+          <button class="text-sm text-BrightBlue font-semibold focus:outline-none">All</button>
+          <button class="text-sm text-DarkGrayishBlue font-semibold focus:outline-none">Active</button>
+          <button class="text-sm text-DarkGrayishBlue font-semibold focus:outline-none">Completed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Todo -->
+  <!-- Add dynamic number -->
+
+  <!-- <div class="text-8xl">
+    items left All Active Completed Clear Completed Drag and drop to reorder
+    list
+  </div>
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Your
+      Name Here</a>.
+  </div> -->
 </body>
+
 </html>
