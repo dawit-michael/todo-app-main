@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+body {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.bg-image {
+  background-image: url("/images/bg-desktop-dark.jpg");
+}
+
+@media only screen and (max-width: 600px) {
+  .bg-image {
+    background-image: url("/images/bg-mobile-dark.jpg");
+  }
+}
+/*# sourceMappingURL=style.css.map */

@@ -4,7 +4,8 @@
   "description": "![Design preview for the Todo app coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-scss": "postcss src/styles/Tailwind.scss -o public/main.scss"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "dependencies": {
     "autoprefixer": "^10.1.0",
     "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
+    "sass": "^1.32.0",
     "tailwindcss": "^2.0.2"
   }
 }
