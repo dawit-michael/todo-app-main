@@ -22,6 +22,10 @@ body {
   background-position: center;
 }
 
+.filter-list {
+  display: hidden;
+}
+
 // scroll bar
 /* width */
 ::-webkit-scrollbar {

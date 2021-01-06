@@ -1,5 +1,17 @@
 var inputToDo = document.getElementById("inputToDo");
-
+// variables
+var todoList = document.getElementById("todolist"),
+  checkBtn = document.getElementsByClassName("checkbtn"),
+  deleteBtn = document.getElementsByClassName("deleteBtn"),
+  clear = document
+    .getElementById("clearCompleted")
+    .addEventListener("click", function () {
+      clearCompleted();
+    }),
+  itemsCount = document.getElementById("itemsCount"),
+  filter = document.getElementsByClassName("filter"),
+  checkIcon = document.createElement("img");
+checkIcon.src = "/images/icon-check.svg";
 // attach key up event to the to do list input
 inputToDo.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
@@ -7,16 +19,12 @@ inputToDo.addEventListener("keyup", (e) => {
     e.preventDefault();
     // Trigger the add to list function
     addTask();
-    // newElement();
+    itemsCount.innerHTML = itemsLeft + " " + "items left";
   }
 });
 
-// variables
-var todoList = document.getElementById("todolist");
-var checkBtn = document.getElementsByClassName("checkbtn");
-var deleteBtn = document.getElementsByClassName("deleteBtn");
-var checkIcon = document.createElement("img");
-checkIcon.src = "/images/icon-check.svg";
+var itemsLeft = todoList.childElementCount;
+
 //  function to add to list
 function addTask() {
   var todoValue = inputToDo.value;
@@ -67,33 +75,72 @@ function addTask() {
   if (todoValue == "" || todoValue == " ") {
     window.alert("Enter item to list first");
   } else {
-    todoList.appendChild(tile);
+    todoList.prepend(tile);
   }
 
   //   add event listener to delete button
   deleteTask();
   //   add event listener to check button
   completeTask();
+
+  itemsLeft++;
+  itemsCount.innerHTML = itemsLeft + " " + "items left";
 }
 
-// delte task from todolist
+// delete task from  tasklist
 
 function deleteTask() {
   for (let i = 0; i < deleteBtn.length; i++) {
-    deleteBtn[i].addEventListener("click", function () {
+    deleteBtn[i].onclick = function () {
       var div = this.parentElement;
       div.style.display = "none";
-    });
+      if (div.style.display == "none") {
+        if (!checkBtn[i].classList.contains("check-icon")) {
+          itemsLeft--;
+          itemsCount.innerHTML = itemsLeft + " " + "items left";
+        }
+      }
+    };
   }
 }
-// complete task from todolist
+// complete task from tasklist
 function completeTask() {
   for (let index = 0; index < checkBtn.length; index++) {
-    checkBtn[index].addEventListener("click", function () {
+    checkBtn[index].onclick = function () {
       this.classList.toggle("check-icon");
+      if (this.classList.contains("check-icon")) {
+        if (itemsLeft == 0) {
+          itemsLeft = 0;
+        } else itemsLeft--;
+      } else {
+        itemsLeft++;
+      }
+      itemsCount.innerHTML = itemsLeft + " " + "items left";
       var content = this.nextElementSibling;
       content.classList.toggle("line-through");
       content.classList.toggle("text-DarkGrayishBlue");
-    });
+    };
   }
+}
+// clearCompleted
+function clearCompleted() {
+  for (let index = 0; index < checkBtn.length; index++) {
+    if (checkBtn[index].classList.contains("check-icon")) {
+      var parent = checkBtn[index].parentElement;
+      parent.parentElement.style.display = "none";
+      console.log(parent);
+    }
+  }
+}
+// filter:
+for (let index = 0; index < filter.length; index++) {
+  filter[index].onclick = function () {
+    if (filter[index].value == "All") {
+      console.log("all");
+    } else if (filter[index].value == "Active") {
+      console.log("Active");
+    } else {
+      console.log("Completed");
+    }
+  };
 }
