@@ -1,13 +1,12 @@
 var inputToDo = document.getElementById("inputToDo");
 // variables
 var todoList = document.getElementById("todolist"),
+  tiles = document.getElementsByClassName("tile"),
   checkBtn = document.getElementsByClassName("checkbtn"),
   deleteBtn = document.getElementsByClassName("deleteBtn"),
   clear = document
     .getElementById("clearCompleted")
-    .addEventListener("click", function () {
-      clearCompleted();
-    }),
+    .addEventListener("click", clearCompleted),
   itemsCount = document.getElementById("itemsCount"),
   filter = document.getElementsByClassName("filter"),
   checkIcon = document.createElement("img");
@@ -37,6 +36,7 @@ function addTask() {
     checkbox = document.createElement("button"),
     cancel = document.createElement("img");
   //   add styling
+  tile.className = "tile";
   tile.classList.add(
     "h-16",
     "flex",
@@ -93,7 +93,7 @@ function deleteTask() {
   for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].onclick = function () {
       var div = this.parentElement;
-      div.style.display = "none";
+      div.remove();
       if (div.style.display == "none") {
         if (!checkBtn[i].classList.contains("check-icon")) {
           itemsLeft--;
@@ -135,12 +135,83 @@ function clearCompleted() {
 // filter:
 for (let index = 0; index < filter.length; index++) {
   filter[index].onclick = function () {
-    if (filter[index].value == "All") {
-      console.log("all");
-    } else if (filter[index].value == "Active") {
-      console.log("Active");
-    } else {
-      console.log("Completed");
+    switch (filter[index].value) {
+      case "All":
+        {
+          for (let j = 0; j < filter.length; j++) {
+            if (j === index) {
+              if (filter[j].classList.contains("text-DarkGrayishBlue")) {
+                if (!filter[j].classList.contains("text-BrightBlue")) {
+                  filter[j].classList.remove("text-DarkGrayishBlue");
+                  filter[j].classList.add("text-BrightBlue");
+                }
+              }
+            }
+            //    else
+            else {
+              if (filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-BrightBlue");
+                filter[j].classList.add("text-DarkGrayishBlue");
+              } else {
+              }
+            }
+          }
+          for (let j = 0; j < tiles.length; j++) {
+            tiles[j].style.display = "flex";
+          }
+        }
+        break;
+      case "Active":
+        for (let j = 0; j < filter.length; j++) {
+          if (j === index) {
+            if (filter[j].classList.contains("text-DarkGrayishBlue")) {
+              if (!filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-DarkGrayishBlue");
+                filter[j].classList.add("text-BrightBlue");
+              }
+            }
+          }
+          //    else
+          else {
+            if (filter[j].classList.contains("text-BrightBlue")) {
+              filter[j].classList.remove("text-BrightBlue");
+              filter[j].classList.add("text-DarkGrayishBlue");
+            } else {
+            }
+          }
+        }
+        for (let j = 0; j < tiles.length; j++) {
+          tiles[j].style.display = "flex";
+          if (checkBtn[j].classList.contains("check-icon")) {
+            tiles[j].style.display = "none";
+          }
+        }
+        break;
+      case "Completed":
+        for (let j = 0; j < filter.length; j++) {
+          if (j === index) {
+            if (filter[j].classList.contains("text-DarkGrayishBlue")) {
+              if (!filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-DarkGrayishBlue");
+                filter[j].classList.add("text-BrightBlue");
+              }
+            }
+          }
+          //    else
+          else {
+            if (filter[j].classList.contains("text-BrightBlue")) {
+              filter[j].classList.remove("text-BrightBlue");
+              filter[j].classList.add("text-DarkGrayishBlue");
+            } else {
+            }
+          }
+        }
+        for (let j = 0; j < tiles.length; j++) {
+          tiles[j].style.display = "flex";
+          if (!checkBtn[j].classList.contains("check-icon")) {
+            tiles[j].style.display = "none";
+          }
+        }
     }
   };
 }
