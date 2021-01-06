@@ -15,5 +15,35 @@ body {
 //
 
 .check-icon {
-  background-image: url("/images/icon-check.svg");
+  background: url("/images/icon-check.svg"),
+    linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+}
+
+// scroll bar
+/* width */
+::-webkit-scrollbar {
+  //   background-color: hsla(235, 24%, 19%, 0);
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: hsla(235, 24%, 19%, 0);
+  //   background-color: hsla(235, 21%, 11%, 0.322);
+  //   box-shadow: 0 0 3px hsl(235, 21%, 11%);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: hsl(235, 21%, 11%);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(220, 98%, 61%);
 }

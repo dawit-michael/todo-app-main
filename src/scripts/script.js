@@ -6,26 +6,42 @@ inputToDo.addEventListener("keyup", (e) => {
     //   Cancel the default action, if needed
     e.preventDefault();
     // Trigger the add to list function
-    addToList();
+    addTask();
+    // newElement();
   }
 });
 
+// variables
+var todoList = document.getElementById("todolist");
+var checkBtn = document.getElementsByClassName("checkbtn");
+var deleteBtn = document.getElementsByClassName("deleteBtn");
+var checkIcon = document.createElement("img");
+checkIcon.src = "/images/icon-check.svg";
 //  function to add to list
-function addToList() {
+function addTask() {
   var todoValue = inputToDo.value;
 
   //   create elements
-  var todoList = document.getElementById("todolist"),
-    tile = document.createElement("li"),
+  var tile = document.createElement("li"),
     container = document.createElement("div"),
     headline = document.createElement("h6"),
     text = document.createTextNode(todoValue),
     checkbox = document.createElement("button"),
     cancel = document.createElement("img");
   //   add styling
-  tile.classList.add("h-16", "flex", "items-center", "justify-between", "px-6");
+  tile.classList.add(
+    "h-16",
+    "flex",
+    "items-center",
+    "justify-between",
+    "px-6",
+    "border-b",
+    "border-gray-600"
+  );
   container.classList.add("flex", "items-center", "space-x-4");
+  headline.className = "content";
   headline.classList.add("text-gray-200");
+  checkbox.className = "checkbtn";
   checkbox.classList.add(
     "rounded-full",
     "w-6",
@@ -35,15 +51,49 @@ function addToList() {
     "flex",
     "items-center",
     "justify-center",
-    "focus:outline-none"
+    "focus:outline-none",
+    "cursor-pointer"
   );
-  cancel.classList.add("w-4", "h-4");
+
   cancel.src = "/images//icon-cross.svg";
+  cancel.className = "deleteBtn";
+  cancel.classList.add("w-3", "h-3", "cursor-pointer");
   // append childs
   headline.appendChild(text);
   container.appendChild(checkbox);
   container.appendChild(headline);
   tile.appendChild(container);
   tile.appendChild(cancel);
-  todoList.appendChild(tile);
+  if (todoValue == "" || todoValue == " ") {
+    window.alert("Enter item to list first");
+  } else {
+    todoList.appendChild(tile);
+  }
+
+  //   add event listener to delete button
+  deleteTask();
+  //   add event listener to check button
+  completeTask();
+}
+
+// delte task from todolist
+
+function deleteTask() {
+  for (let i = 0; i < deleteBtn.length; i++) {
+    deleteBtn[i].addEventListener("click", function () {
+      var div = this.parentElement;
+      div.style.display = "none";
+    });
+  }
+}
+// complete task from todolist
+function completeTask() {
+  for (let index = 0; index < checkBtn.length; index++) {
+    checkBtn[index].addEventListener("click", function () {
+      this.classList.toggle("check-icon");
+      var content = this.nextElementSibling;
+      content.classList.toggle("line-through");
+      content.classList.toggle("text-DarkGrayishBlue");
+    });
+  }
 }
