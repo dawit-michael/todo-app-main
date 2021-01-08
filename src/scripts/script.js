@@ -77,10 +77,12 @@ function addTask() {
   container.appendChild(headline);
   tile.appendChild(container);
   tile.appendChild(cancel);
+
   if (todoValue == "" || todoValue == " ") {
     window.alert("Enter item to list first");
   } else {
     todoList.prepend(tile);
+    inputToDo.value = "";
   }
 
   //   add event listener to delete button
@@ -93,7 +95,7 @@ function addTask() {
   itemsCount.innerHTML = itemsLeft + " " + "items left";
 }
 
-// todo add hover property to check btn
+// add hover property to check btn
 function hoverdeleteTask() {
   for (let i = 0; i < tiles.length; i++) {
     tiles[i].onmouseenter = function () {
@@ -106,7 +108,7 @@ function hoverdeleteTask() {
     };
   }
 }
-// todo hover complete task
+// hover complete task
 function hovercompleteTask() {
   for (let i = 0; i < tiles.length; i++) {
     checkBtn[i].onmouseenter = function () {
@@ -144,15 +146,14 @@ function completeTask() {
 // delete task from  tasklist
 
 function deleteTask() {
-  for (let i = 0; i < deleteBtn.length; i++) {
+  for (let i = 0; i < tiles.length; i++) {
     deleteBtn[i].onclick = function () {
       var div = this.parentElement;
       div.remove();
-      if (!checkBtn[i].classList.contains("check-icon")) {
+      if (!div.firstChild.firstChild.classList.contains("check-icon")) {
         itemsLeft--;
         itemsCount.innerHTML = itemsLeft-- + " " + "items left";
       }
-      console.log(checkBtn);
     };
   }
 }
@@ -179,6 +180,7 @@ for (let index = 0; index < filter.length; index++) {
             if (j === index) {
               if (filter[j].classList.contains("text-DarkGrayishBlue")) {
                 if (!filter[j].classList.contains("text-BrightBlue")) {
+                  filter[j].classList.remove("text-white");
                   filter[j].classList.remove("text-DarkGrayishBlue");
                   filter[j].classList.add("text-BrightBlue");
                 }
@@ -187,6 +189,7 @@ for (let index = 0; index < filter.length; index++) {
             //    else
             else {
               if (filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-BrightBlue");
                 filter[j].classList.add("text-DarkGrayishBlue");
               } else {
@@ -203,6 +206,7 @@ for (let index = 0; index < filter.length; index++) {
           if (j === index) {
             if (filter[j].classList.contains("text-DarkGrayishBlue")) {
               if (!filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-DarkGrayishBlue");
                 filter[j].classList.add("text-BrightBlue");
               }
@@ -211,6 +215,7 @@ for (let index = 0; index < filter.length; index++) {
           //    else
           else {
             if (filter[j].classList.contains("text-BrightBlue")) {
+              filter[j].classList.remove("text-white");
               filter[j].classList.remove("text-BrightBlue");
               filter[j].classList.add("text-DarkGrayishBlue");
             } else {
@@ -229,6 +234,7 @@ for (let index = 0; index < filter.length; index++) {
           if (j === index) {
             if (filter[j].classList.contains("text-DarkGrayishBlue")) {
               if (!filter[j].classList.contains("text-BrightBlue")) {
+                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-DarkGrayishBlue");
                 filter[j].classList.add("text-BrightBlue");
               }
@@ -237,6 +243,7 @@ for (let index = 0; index < filter.length; index++) {
           //    else
           else {
             if (filter[j].classList.contains("text-BrightBlue")) {
+              filter[j].classList.remove("text-white");
               filter[j].classList.remove("text-BrightBlue");
               filter[j].classList.add("text-DarkGrayishBlue");
             } else {
