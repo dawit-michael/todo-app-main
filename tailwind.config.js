@@ -1,6 +1,6 @@
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -16,6 +16,9 @@ module.exports = {
         LightGrayishBluehover: "	#e4e5f1",
         DarkGrayishBlue: "#777a92",
         VeryDarkGrayishBlue: "	#4d5066",
+      },
+      cursor: {
+        grab: "grab",
       },
     },
   },
