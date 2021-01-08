@@ -25,6 +25,18 @@ body {
 .filter-list {
   display: hidden;
 }
+.border-gradient {
+  border-top: double 5px transparent;
+
+  /* first gradient is for card background, second for border background */
+  background-image: linear-gradient(white, white),
+    linear-gradient(to right, grey, black);
+
+  // border-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.checkbtn {
+  border: 2px solid blue;
+}
 
 // scroll bar
 /* width */

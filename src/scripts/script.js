@@ -11,6 +11,10 @@ var todoList = document.getElementById("todolist"),
   filter = document.getElementsByClassName("filter"),
   checkIcon = document.createElement("img");
 checkIcon.src = "/images/icon-check.svg";
+
+var theme = document
+  .getElementById("themeImg")
+  .addEventListener("click", themeManager);
 // attach key up event to the to do list input
 inputToDo.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
@@ -44,7 +48,8 @@ function addTask() {
     "justify-between",
     "px-6",
     "border-b",
-    "border-gray-600"
+    "border-gray-600",
+    "cursor-grab"
   );
   container.classList.add("flex", "items-center", "space-x-4");
   headline.className = "content";
@@ -65,7 +70,7 @@ function addTask() {
 
   cancel.src = "/images//icon-cross.svg";
   cancel.className = "deleteBtn";
-  cancel.classList.add("w-3", "h-3", "cursor-pointer");
+  cancel.classList.add("w-3", "h-3", "cursor-pointer", "hidden");
   // append childs
   headline.appendChild(text);
   container.appendChild(checkbox);
@@ -82,27 +87,41 @@ function addTask() {
   deleteTask();
   //   add event listener to check button
   completeTask();
-
+  hoverdeleteTask();
+  hovercompleteTask();
   itemsLeft++;
   itemsCount.innerHTML = itemsLeft + " " + "items left";
 }
 
-// delete task from  tasklist
-
-function deleteTask() {
-  for (let i = 0; i < deleteBtn.length; i++) {
-    deleteBtn[i].onclick = function () {
-      var div = this.parentElement;
-      div.remove();
-      if (div.style.display == "none") {
-        if (!checkBtn[i].classList.contains("check-icon")) {
-          itemsLeft--;
-          itemsCount.innerHTML = itemsLeft + " " + "items left";
-        }
-      }
+// todo add hover property to check btn
+function hoverdeleteTask() {
+  for (let i = 0; i < tiles.length; i++) {
+    tiles[i].onmouseenter = function () {
+      var div = this.lastChild;
+      div.classList.remove("hidden");
+    };
+    tiles[i].onmouseleave = function () {
+      var div = this.lastChild;
+      div.classList.add("hidden");
     };
   }
 }
+// todo hover complete task
+function hovercompleteTask() {
+  for (let i = 0; i < tiles.length; i++) {
+    checkBtn[i].onmouseenter = function () {
+      this.classList.remove("border");
+      this.classList.remove("border-DarkGrayishBlue");
+      this.classList.add("border-gradient");
+    };
+    checkBtn[i].onmouseleave = function () {
+      this.classList.remove("border-gradient");
+      this.classList.add("border");
+      this.classList.add("border-DarkGrayishBlue");
+    };
+  }
+}
+
 // complete task from tasklist
 function completeTask() {
   for (let index = 0; index < checkBtn.length; index++) {
@@ -122,16 +141,34 @@ function completeTask() {
     };
   }
 }
+// delete task from  tasklist
+
+function deleteTask() {
+  for (let i = 0; i < deleteBtn.length; i++) {
+    deleteBtn[i].onclick = function () {
+      var div = this.parentElement;
+      div.remove();
+      if (!checkBtn[i].classList.contains("check-icon")) {
+        itemsLeft--;
+        itemsCount.innerHTML = itemsLeft-- + " " + "items left";
+      }
+      console.log(checkBtn);
+    };
+  }
+}
+// ! bug :  fixed clear completed doesnt remove elmements online hides them
 // clearCompleted
 function clearCompleted() {
-  for (let index = 0; index < checkBtn.length; index++) {
-    if (checkBtn[index].classList.contains("check-icon")) {
-      var parent = checkBtn[index].parentElement;
-      parent.parentElement.style.display = "none";
-      console.log(parent);
+  for (let index = 0; index < tiles.length; index++) {
+    for (let j = 0; j < tiles.length; j++) {
+      if (checkBtn[index].classList.contains("check-icon")) {
+        var parent = checkBtn[index].parentElement;
+        parent.parentElement.remove();
+      }
     }
   }
 }
+
 // filter:
 for (let index = 0; index < filter.length; index++) {
   filter[index].onclick = function () {
@@ -215,3 +252,47 @@ for (let index = 0; index < filter.length; index++) {
     }
   };
 }
+
+// theme themeManager
+function themeManager() {
+  var themeData = document.getElementById("themeImg");
+  console.log(themeData.src);
+  themeData.src == "/images/icon-moon.svg";
+}
+
+// Create a timeline with default parameters
+var tl = anime.timeline({
+  easing: "easeOutCirc",
+  duration: 250,
+});
+
+// Add children
+tl.add({
+  targets: "#heading",
+  opacity: [0, 1],
+})
+  .add({
+    targets: "#inputtask",
+    translateY: [20, 0],
+    opacity: [0, 1],
+  })
+  .add({
+    targets: "#mobiletab",
+    translateY: [20, 0],
+    opacity: [0, 1],
+  });
+
+var animation = anime({
+  easing: "easeOutCirc",
+  targets: "#list",
+  // translateY: [20, 0],
+  opacity: [0, 1],
+  delay: 350,
+});
+var tab = anime({
+  targets: "#desktoptab",
+  easing: "easeOutCirc",
+  // translateY: [20, 0],
+  opacity: [0, 1],
+  delay: 350,
+});
