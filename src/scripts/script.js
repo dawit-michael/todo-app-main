@@ -1,6 +1,7 @@
-var inputToDo = document.getElementById("inputToDo");
+var themeState = "dark";
 // variables
-var todoList = document.getElementById("todolist"),
+var inputToDo = document.getElementById("inputToDo"),
+  todoList = document.getElementById("todolist"),
   tiles = document.getElementsByClassName("tile"),
   checkBtn = document.getElementsByClassName("checkbtn"),
   deleteBtn = document.getElementsByClassName("deleteBtn"),
@@ -11,6 +12,16 @@ var todoList = document.getElementById("todolist"),
   filter = document.getElementsByClassName("filter"),
   checkIcon = document.createElement("img");
 checkIcon.src = "/images/icon-check.svg";
+
+// theme variables
+var bodyBg = document.getElementById("bodybg"),
+  bodyImg = document.getElementById("bodyimg"),
+  inputTask = document.getElementById("inputtask"),
+  tasksList = document.getElementById("list"),
+  desktopTab = document.getElementById("desktoptab"),
+  mobileTab = document.getElementById("mobiletab"),
+  textContent = document.getElementsByClassName("content"),
+  clearBtn = document.getElementById("clearCompleted");
 
 var theme = document
   .getElementById("themeImg")
@@ -169,7 +180,25 @@ function clearCompleted() {
     }
   }
 }
+// hover clearcompleted
+function hoverclearCompleted() {
+  clearBtn.onmouseenter = function () {
+    if (themeState == "dark") {
+      this.classList.remove("text-DarkGrayishBlue");
+      this.classList.add("text-white");
+    } else {
+      this.classList.remove("text-DarkGrayishBlue");
+      this.classList.add("text-black");
+    }
+  };
+  clearBtn.onmouseleave = function () {
+    this.classList.add("text-DarkGrayishBlue");
+    this.classList.remove("text-white");
+    this.classList.remove("text-black");
+  };
+}
 
+hoverclearCompleted();
 // filter:
 for (let index = 0; index < filter.length; index++) {
   filter[index].onclick = function () {
@@ -180,7 +209,6 @@ for (let index = 0; index < filter.length; index++) {
             if (j === index) {
               if (filter[j].classList.contains("text-DarkGrayishBlue")) {
                 if (!filter[j].classList.contains("text-BrightBlue")) {
-                  filter[j].classList.remove("text-white");
                   filter[j].classList.remove("text-DarkGrayishBlue");
                   filter[j].classList.add("text-BrightBlue");
                 }
@@ -189,7 +217,6 @@ for (let index = 0; index < filter.length; index++) {
             //    else
             else {
               if (filter[j].classList.contains("text-BrightBlue")) {
-                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-BrightBlue");
                 filter[j].classList.add("text-DarkGrayishBlue");
               } else {
@@ -206,7 +233,6 @@ for (let index = 0; index < filter.length; index++) {
           if (j === index) {
             if (filter[j].classList.contains("text-DarkGrayishBlue")) {
               if (!filter[j].classList.contains("text-BrightBlue")) {
-                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-DarkGrayishBlue");
                 filter[j].classList.add("text-BrightBlue");
               }
@@ -215,7 +241,6 @@ for (let index = 0; index < filter.length; index++) {
           //    else
           else {
             if (filter[j].classList.contains("text-BrightBlue")) {
-              filter[j].classList.remove("text-white");
               filter[j].classList.remove("text-BrightBlue");
               filter[j].classList.add("text-DarkGrayishBlue");
             } else {
@@ -234,7 +259,6 @@ for (let index = 0; index < filter.length; index++) {
           if (j === index) {
             if (filter[j].classList.contains("text-DarkGrayishBlue")) {
               if (!filter[j].classList.contains("text-BrightBlue")) {
-                filter[j].classList.remove("text-white");
                 filter[j].classList.remove("text-DarkGrayishBlue");
                 filter[j].classList.add("text-BrightBlue");
               }
@@ -243,7 +267,6 @@ for (let index = 0; index < filter.length; index++) {
           //    else
           else {
             if (filter[j].classList.contains("text-BrightBlue")) {
-              filter[j].classList.remove("text-white");
               filter[j].classList.remove("text-BrightBlue");
               filter[j].classList.add("text-DarkGrayishBlue");
             } else {
@@ -262,9 +285,60 @@ for (let index = 0; index < filter.length; index++) {
 
 // theme themeManager
 function themeManager() {
-  var themeData = document.getElementById("themeImg");
-  console.log(themeData.src);
-  themeData.src == "/images/icon-moon.svg";
+  var themeIcon = document.getElementById("themeImg");
+  var imageString = themeIcon.src;
+  var indexPosition = imageString.indexOf("/images");
+  var imageSrc = imageString.substring(indexPosition);
+  if (imageSrc == "/images/icon-moon.svg") {
+    themeIcon.src = "/images/icon-sun.svg";
+    darkTheme();
+    themeState = "dark";
+  } else {
+    themeIcon.src = "/images/icon-moon.svg";
+    lightTheme();
+    themeState = "light";
+  }
+}
+
+// themedatas
+function lightTheme() {
+  bodyImg.classList.remove("bg-image-dark");
+  bodyImg.classList.add("bg-image-light");
+  bodyBg.classList.remove("bg-VeryDarkBlue");
+  bodyBg.classList.add("bg-VeryLightGray");
+  inputTask.classList.remove("bg-VeryDarkDesaturatedBlue");
+  inputTask.classList.add("bg-VeryLightGray");
+  inputToDo.classList.remove("text-white");
+  tasksList.classList.remove("bg-VeryDarkDesaturatedBlue");
+  tasksList.classList.add("bg-VeryLightGray");
+  desktopTab.classList.remove("bg-VeryDarkDesaturatedBlue");
+  desktopTab.classList.add("bg-VeryLightGray");
+  mobileTab.classList.remove("bg-VeryDarkDesaturatedBlue");
+  mobileTab.classList.add("bg-VeryVeryLightGray");
+  for (let index = 0; index < textContent.length; index++) {
+    textContent[index].classList.remove("text-gray-200");
+    textContent[index].classList.add("text-gray-800");
+  }
+}
+function darkTheme() {
+  bodyImg.classList.remove("bg-image-light");
+  bodyImg.classList.add("bg-image-dark");
+  bodyBg.classList.remove("bg-VeryLightGray");
+  bodyBg.classList.add("bg-VeryDarkBlue");
+  inputTask.classList.remove("bg-VeryLightGray");
+  inputTask.classList.add("bg-VeryDarkDesaturatedBlue");
+  inputToDo.classList.add("text-white");
+  // inputToDo.classList.remove("text-black");
+  tasksList.classList.add("bg-VeryDarkDesaturatedBlue");
+  tasksList.classList.remove("bg-VeryLightGray");
+  desktopTab.classList.add("bg-VeryDarkDesaturatedBlue");
+  desktopTab.classList.remove("bg-VeryLightGray");
+  mobileTab.classList.add("bg-VeryDarkDesaturatedBlue");
+  mobileTab.classList.remove("bg-VeryLightGray");
+  for (let index = 0; index < textContent.length; index++) {
+    textContent[index].classList.add("text-gray-200");
+    textContent[index].classList.remove("text-gray-800");
+  }
 }
 
 // Create a timeline with default parameters
